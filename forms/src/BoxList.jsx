@@ -4,13 +4,16 @@ import NewBoxForm from './NewBoxForm';
 
 const BoxList = () => {
     const [boxes, setBoxes] = useState([]);
+    const [idCounter, setIdCounter] = useState(1); // Initialize id counter
 
     const addBox = (newBox) => {
-        setBoxes(boxes => [...boxes, newBox]);
+        const boxWithId = { ...newBox, id: idCounter }; // Assign id to the new box
+        setBoxes(prevBoxes => [...prevBoxes, boxWithId]);
+        setIdCounter(prevId => prevId + 1); // Increment id counter
     };
 
     const removeBox = (id) => {
-        setBoxes(boxes => boxes.filter(box => box.id !== id));
+        setBoxes(prevBoxes => prevBoxes.filter(box => box.id !== id));
     };
 
     return (
